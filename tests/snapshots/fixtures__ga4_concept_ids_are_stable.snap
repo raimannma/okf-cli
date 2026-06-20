@@ -1,0 +1,17 @@
+---
+source: tests/fixtures.rs
+expression: ids
+---
+[
+    "datasets/ga4_obfuscated_sample_ecommerce",
+    "references/joins/events___ads_clickstats",
+    "references/metrics/avg_pageviews",
+    "references/metrics/avg_spend_per_purchase_session_by_user",
+    "references/metrics/avg_transactions_per_purchaser",
+    "references/metrics/day_count",
+    "references/metrics/event_count",
+    "references/metrics/new_user_count",
+    "references/metrics/overall_avg_spend_per_purchase_session",
+    "references/metrics/user_count",
+    "tables/events_",
+]

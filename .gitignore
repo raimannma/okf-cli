@@ -1,0 +1,16 @@
+# Compiled output
+/target
+
+# Backtrace/debug artifacts
+*.pdb
+
+# Insta snapshot review files (committed .snap stays, pending ones don't)
+*.snap.new
+*.pending-snap
+
+# Editor / OS
+*.swp
+*~
+.DS_Store
+.idea/
+.vscode/

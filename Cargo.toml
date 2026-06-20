@@ -1,0 +1,80 @@
+[package]
+name = "okf-cli"
+version = "0.1.0"
+edition = "2024"
+description = "A cross-platform command-line tool"
+license = "MIT"
+repository = "https://github.com/raimannma12/okf-cli"
+readme = "README.md"
+
+[lib]
+name = "okf"
+path = "src/lib.rs"
+
+[[bin]]
+name = "okf"
+path = "src/main.rs"
+
+[dependencies]
+clap = { version = "4.6.1", features = ["derive", "wrap_help", "env"] }
+pulldown-cmark = { version = "0.13.4", default-features = false }
+rayon = "1.12.0"
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1.0.150"
+serde_yaml = "0.9.34"
+similar = "3.1.1"
+thiserror = "2.0.18"
+time = { version = "0.3.44", features = ["macros", "parsing"] }
+toon-format = { version = "0.5.0", optional = true }
+tracing = "0.1.44"
+tracing-subscriber = { version = "0.3.23", features = ["env-filter", "fmt"] }
+walkdir = "2.5.0"
+
+[features]
+default = []
+# Adds a `toon` output format (`--format toon`): a token-efficient JSON
+# alternative for LLM prompts, via the `toon-format` crate.
+toon = ["dep:toon-format"]
+
+[profile.release]
+strip = true
+lto = "thin"
+codegen-units = 1
+panic = "abort"
+
+# Lint configuration is the enforcement mechanism for the project rules:
+# no unwrap, no expect, no panic, proper error handling.
+# `cargo clippy` (and `cargo build` for the rustc lints) will fail on violation.
+[lints.rust]
+unsafe_code = "forbid"
+missing_debug_implementations = "warn"
+unreachable_pub = "warn"
+
+[lints.clippy]
+# Lint groups, set to `warn` so they surface but stay overridable per-line.
+all = { level = "warn", priority = -1 }
+pedantic = { level = "warn", priority = -1 }
+
+# Hard bans — these are denied so CI/build fails rather than warns.
+unwrap_used = "deny"
+expect_used = "deny"
+panic = "deny"
+unimplemented = "deny"
+todo = "deny"
+unreachable = "deny"
+indexing_slicing = "deny"
+panic_in_result_fn = "deny"
+exit = "deny"
+get_unwrap = "deny"
+string_slice = "deny"
+
+# Error-handling hygiene.
+missing_errors_doc = "warn"
+missing_panics_doc = "warn"
+
+# Pedantic lints that are noisy for a CLI and not worth enforcing.
+module_name_repetitions = "allow"
+
+[dev-dependencies]
+insta = { version = "1.48.0", features = ["json", "yaml"] }
+tempfile = "3.27.0"
