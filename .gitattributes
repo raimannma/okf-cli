@@ -1,0 +1,5 @@
+# Normalize line endings to LF on checkout for every platform. okf generates
+# index.md with LF, and tests compare committed fixtures byte-for-byte against
+# the generator, so a CRLF checkout (git's Windows autocrlf default) would
+# report spurious drift.
+* text=auto eol=lf
